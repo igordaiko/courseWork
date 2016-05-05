@@ -1,0 +1,33 @@
+﻿@using City_Go.Models;
+@{ 
+    List<FilterModel> Model = ViewBag.Filters;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Давай определимся немного</h1>
+        </div>
+    </div>
+
+    <h2 class="warning" id="warning">Не спеши! Выбери тип прогулки!</h2>
+    <div id="filters">
+        <ul class="choice-list">
+
+            @foreach (var item in Model)
+            {
+                <li class="check_b @item.Name" data-toggle="tooltip" data-placement="top" title="@item.Description"></li>
+            }
+
+        </ul>
+        <div class="clear"></div>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a href="#" id="but_filter"><div class="but_filter"><h2>Мне уже не терпится!</h2></div></a>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    </div>
+</div>

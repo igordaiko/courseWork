@@ -1,0 +1,188 @@
+﻿@model City_Go.Models.HomeModel
+@using City_Go.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html class="fsvs">
+<head>
+    <title>CITYgo</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style/main.css" />
+    <link rel="stylesheet" href="style/fonts.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="style/animated_checkbox.css" type="text/css" />
+    <link rel="stylesheet" href="js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+</head>
+<body>
+
+    <section id="bg">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h1>city<span>go</span></h1>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <a href="#">
+                    <div id="but_go"><h2>крути вниз</h2></div>
+                </a>
+            </div>
+
+            <div class="col-md-5"></div>
+        </div>
+
+    </section>
+    <section id="choose_cat">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                @using (Ajax.BeginForm("Change_Filter", new AjaxOptions { UpdateTargetId = "filter" }))
+                {
+                    <input type="submit" id="sub" style="display:none;" />
+                    <input type="hidden" id="hid_name" name="id" />
+                    <ul class="mnu">
+                            @foreach (CategoriesModel category in Model.Categories)
+                            {
+                                <li>
+                                    <a id="@category.html_id" onclick="change_filters(@category.ID)" href="#">
+                                        <div class="main_mnu">
+                                            <span id="logo_@category.ID"></span>
+                                            <h2>@category.Name</h2>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        
+                    </ul>
+                }   
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                    <div class="info_mnu">
+                        <h1>city<span>go</span></h1>
+                        <h2>Яркие сцены в театре жизни</h2>
+                        <img src="img/city_icon.png">
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row but_mnu">
+                <div class="col-md-6"></div>
+                <div class="col-md-2"><a href=""><h5>О проекте</h5></a></div>
+                <div class="col-md-2"><a href=""><h5>Обратная связь</h5></a></div>
+                <div class="col-md-2"><a href=""><h5>Поддержка</h5></a></div>
+            </div>
+        </div>
+    </section>
+    <!--Cекция для фильтров. Заполняется автоматически ajax запросом-->
+    <section id="filter"></section>
+    
+    
+    <section id="sum">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"><h1>Насколько ты богат?</h1></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><a href=""><span id="rich"></span></a></div>
+                <div class="col-md-4"><a href=""><span id="medium"></span></a></div>
+                <div class="col-md-4"><a href=""><span id="poor"></span></a></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <input class='but_sum' type="text" placeholder="Количество денег, UAH">
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <a href="#" id="sum_but"><div class="but_sum"><h2>Поехали</h2></div></a>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </section>
+    <section id="result">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="container-fluid inner">
+                        <table class="table ">
+                            <thead>
+                                <tr class="tableizer-firstrow">
+                                    <th>Фото</th>
+                                    <th>Место</th>
+                                    <th>Средняя цена<br> в чеке, грн</th>
+                                    <th>Описание</th>
+                                    <th>Адрес</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="image"><a id="single_1" href="img/campus.jpg"><img width="250" src="img/campus.jpg"></a></div>
+                                    </td>
+                                    <td><a href="info.html">AntiCafe Campus</a></td>
+                                    <td>100</td>
+                                    <td><p>Новый формат заведения для отдыха, работы и учебы. </p></td>
+                                    <td>ул.Борщаговская, 128</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="image"><a href="#"><img width="250" src="img/3bcafe.jpeg"></a></div>
+                                    </td>
+                                    <td><a href="info.html">3bCafe</a></td>
+                                    <td>250</td>
+                                    <td><p>Только тут самые вкусные бургеры и стейки в Киеве! Самое свежее пиво и самая уютная атмосфера.</p></td>
+                                    <td>ул.Хорыва, 23</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="image"><a href="#"><img width="250" src="img/milbar.jpg"></a></div>
+                                    </td>
+                                    
+                                    <td> <a href="info.html">Milk Bar</a></td>
+                                    <td>200</td>
+                                    <td><p>Cakes, Shakes & more</p></td>
+                                    <td>ул.Шота Руставели, 16</td>
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="~/jquery.unobtrusive-ajax.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+    <script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="js/fancybox/jquery.easing-1.3.pack.js"></script>
+    <script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/animated-checkboxes.js"></script>
+    <script src="js/js.js"></script>
+</body>
+</html>
